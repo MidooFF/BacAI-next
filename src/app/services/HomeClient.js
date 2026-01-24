@@ -54,9 +54,9 @@ export const HomeClient = () => {
       </div>
 
       <div
-        // onClick={() => {
-        //   navigate("consecutive-steady");
-        // }}
+        onClick={() => {
+          router.push("/services/consecutive-steady");
+        }}
         className="service shadow-1 fade-in fade-in-3 bg-white text-center rounded-[15px] pb-[20px] pt-[30px] relative cursor-pointer"
       >
         <div

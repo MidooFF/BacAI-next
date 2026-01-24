@@ -11,9 +11,7 @@ import { BlackProvider } from "../context/BlackContext";
 const Home = () => {
   return (
     <BlackProvider>
-      <InfoProvider>
-        <HomeClient></HomeClient>
-      </InfoProvider>
+      <HomeClient></HomeClient>
     </BlackProvider>
   );
 };
