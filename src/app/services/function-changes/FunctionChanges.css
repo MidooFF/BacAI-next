@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+.shortcuts {
+    @apply flex gap-[5px] mr-[5px];
+}
+
+.shortcuts button {
+    @apply w-[20px] text-[20px] bg-[#ddd] rounded-[5px] cursor-pointer
+}
+
+.func-changes-container .main-form {
+    flex-direction: row;
+}
+
+.function-changes-response .eq {
+    margin-top: -10px;
+    line-height: 1.6;
+}
+
+.response-paragraph {
+    line-height: 2;
+    margin-bottom: 1rem;
+    text-align: right;
+  }
+  
+  .math-block {
+    margin: 1rem 0;
+    text-align: center;
+  }
+  
+  .response {
+    direction: rtl;
+    text-align: right;
+  }

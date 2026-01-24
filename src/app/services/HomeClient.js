@@ -1,0 +1,72 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import { TbMathFunction } from "react-icons/tb";
+import { TfiWrite } from "react-icons/tfi";
+import "./Home.css";
+import { checkVPN } from "../hooks/vpnCheck";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { LoadingScreen } from "../components/loadingScreen";
+import { useBlack } from "../context/BlackContext";
+
+export const HomeClient = () => {
+  const router = useRouter();
+  const { loading, isBlocked } = checkVPN();
+
+  if (isBlocked) {
+    return null;
+  }
+  if (loading) {
+    return <LoadingScreen></LoadingScreen>;
+  }
+
+  return (
+    <div className="services-container section-padding grid pt-[60px] max-sm:pt-[40px] gap-[40px]">
+      <div
+        onClick={() => {
+          router.push("/services/arabic-writer");
+        }}
+        className="service shadow-1 fade-in fade-in-1 bg-white text-center rounded-[15px] pb-[20px] pt-[30px] relative cursor-pointer
+  "
+      >
+        <div
+          className="service-icon absolute w-[50px] h-[50px] top-[0] left-[50%] rounded-[15px] shadow-0 gradient 
+          translate-y-[-50%] translate-x-[-50%] flex justify-center items-center"
+        >
+          <TfiWrite className="text-white font-bold text-[30px]" />
+        </div>
+        <p className="service-name text-2xl">كتابة موضوع تعبير</p>
+      </div>
+
+      <div
+        onClick={() => {
+          router.push("/services/function-changes");
+        }}
+        className="service shadow-1 fade-in fade-in-2 bg-white text-center rounded-[15px] pb-[20px] pt-[30px] relative cursor-pointer"
+      >
+        <div
+          className="service-icon absolute w-[50px] h-[50px] top-[0] left-[50%] rounded-[15px] shadow-0 gradient 
+          translate-y-[-50%] translate-x-[-50%] flex justify-center items-center"
+        >
+          <TbMathFunction className="text-white font-bold text-[30px]" />
+        </div>
+        <p className="service-name text-2xl">دراسة تغيرات التابع</p>
+      </div>
+
+      <div
+        // onClick={() => {
+        //   navigate("consecutive-steady");
+        // }}
+        className="service shadow-1 fade-in fade-in-3 bg-white text-center rounded-[15px] pb-[20px] pt-[30px] relative cursor-pointer"
+      >
+        <div
+          className="service-icon absolute w-[50px] h-[50px] top-[0] left-[50%] rounded-[15px] shadow-0 gradient 
+          translate-y-[-50%] translate-x-[-50%] flex justify-center items-center"
+        >
+          <h3 className="text-white font-bold text-[25px]">Un</h3>
+        </div>
+        <p className="service-name text-2xl">دراسة اطراد متتالية</p>
+      </div>
+    </div>
+  );
+};

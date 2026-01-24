@@ -1,26 +1,145 @@
 @import "tailwindcss";
+* {
+  box-sizing: border-box;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  padding-top: 90px;
+  padding-bottom: 200px;
+  overscroll-behavior: none;
+  background-color: white
+}
+
+body.scroll-off {
+  overflow: hidden;
+}
+
+
+@theme {
+  --gradient: linear-gradient(90deg, rgba(255, 0, 234, 1) 0%, rgba(81, 0, 255, 1) 100%);
+}
+
+.section-padding {
+  @apply pl-[5%] pr-[5%]
+}
+
+.shadow-0 {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.shadow-1 {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.shadow-2 {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.shadow-3 {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.fade-in {
+  animation-name: fade-in;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+
+.fade-in-1 {
+  animation-delay: 200ms;
+}
+.fade-in-2 {
+  animation-delay: 300ms;
+}
+.fade-in-3 {
+  animation-delay: 400ms;
+}
+.fade-in-4 {
+  animation-delay: 500ms;
+}
+
+.gradient {
+  background: #ff00ea;
+background: linear-gradient(90deg, rgba(255, 0, 234, 1) 0%, rgba(81, 0, 255, 1) 100%);
+}
+.gradient-reverse {
+  background: #5100ff;
+background: linear-gradient(90deg,rgb(81, 0, 255) 0%,   rgb(255, 0, 234) 100%);
+}
+
+.main-input {
+  @apply rounded-[10px] overflow-hidden relative max-sm:w-full;
+  border: 1px solid #ccc;
+}
+.main-input input{
+  @apply outline-none duration-300 px-[10px] py-[5px] max-sm:w-full
+}
+.main-input input:focus + div {
+  width: 100%
+}
+
+.main-input div {
+  background: #ff00ea;
+  background: linear-gradient(90deg, rgba(255, 0, 234, 1) 0%, rgba(81, 0, 255, 1) 100%);
+  @apply w-0 h-[3px] absolute bottom-0 left-0 duration-300;
+}
+
+.black-on {
+  animation-duration: 300ms;
+  animation-name: black-on;
+  animation-fill-mode: both;
+}
+
+.black-off {
+  animation-duration: 300ms;
+  animation-name: black-off;
+  animation-fill-mode: both;
+}
+
+.info-on {
+  bottom: 0;
+}
+.info-off {
+  bottom: -400px
+}
+
+@keyframes black-on {
+  1% {
+    display: block;
+  }
+  100% {
+    display: block;
+    opacity: 1;
+  }
+}
+
+@keyframes black-off {
+  99% {
+     opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px)
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px)
+  }
 }

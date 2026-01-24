@@ -1,0 +1,24 @@
+"use client";
+import { LoadingScreen } from "../components/loadingScreen";
+import { checkVPN } from "../hooks/vpnCheck";
+
+export const VPNClient = () => {
+  return (
+    <div className="section-padding">
+      <div
+        className="w-[90%] mx-auto rounded-[15px] py-[25px] absolute top-[50%] translate-y-[-50%] text-center text-4xl 
+      shadow-3 bg-white max-sm:text-2xl"
+      >
+        يجب تشغيل VPN
+        <p className="text-[15px] mt-[10px]">يفضل Proton VPN</p>
+      </div>
+      <div
+        className="w-[90%] mx-auto gradient rounded-[15px] py-[25px] absolute top-[51%] z-[-1] translate-y-[-50%] text-center text-4xl 
+      shadow-3 bg-white max-sm:text-2xl"
+      >
+        يجب تشغيل VPN
+        <p className="text-[15px] mt-[10px]">يفضل Proton VPN</p>
+      </div>
+    </div>
+  );
+};

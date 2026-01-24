@@ -1,0 +1,200 @@
+"use client";
+import React, { useRef, useState, useEffect, createRef } from "react";
+import "./ArabicWriter.css";
+import "../Home.css";
+import "../Services.css";
+
+import { useFetch } from "@/app/hooks/useFetch";
+import { IoInformationCircleOutline } from "react-icons/io5";
+import { useBlack } from "@/app/context/BlackContext";
+import { useInfo } from "@/app/context/InfoContext";
+
+export const ArabicWriter = () => {
+  const mainIdea = useRef();
+  const [subIdeas, setSubIdeas] = useState([]);
+  const [subIdeasData, setSubIdeasData] = useState([]);
+  const subIdeasRef = useRef();
+  const [inputError, setInputError] = useState("");
+  const inputErrorRef = useRef();
+  const { data, loading, error, fetchData } = useFetch();
+  const [requested, setRequested] = useState(false);
+  const { toggleInfo } = useInfo();
+  const { toggleBlack } = useBlack();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (subIdeasData.length > 0) {
+      const content = `اكتب موضوعا أدبيا تتحدث فيه عن ${
+        mainIdea.current.value
+      }, ${subIdeasData.map(
+        (item, index) =>
+          `${index + 1}: ${item[0]}, الشاهد: ${item[1]}, الشاعر: ${item[2]}`
+      )}, اكتب مقدمة وخاتمة مناسبة للموضوع, تأكد أن يكون ذكر الشاعر وشاهده في نهاية كل فكرة أي لا تذكر شيء عن الشاعر ولا شاهده حتى الأسطر الأخيرة من الفكرة `;
+      fetchData(content);
+      setRequested(true);
+    }
+  }, [subIdeasData]);
+
+  const renderText = (text) => {
+    return text.split("---").map((main) => {
+      return main.split("**").map((part, i) => {
+        if (i % 2 == 0) {
+          return <h3>{part}</h3>;
+        } else {
+          return <p className="bold text-[20px] mt-[20px]">{part}</p>;
+        }
+      });
+    });
+  };
+  return (
+    <>
+      <div className="container section-padding">
+        <div
+          className={`error ${inputError ? "active" : ""}`}
+          ref={inputErrorRef}
+        >
+          {inputError}
+        </div>
+        <div className="flex fade-in fade-in-1 justify-start max-sm:justify-between items-center">
+          <h1 className="header text-[30px] my-[20px] ml-[20px] max-sm:ml-[5px]">
+            كتابة موضوع تعبير
+          </h1>
+          <IoInformationCircleOutline
+            className="text-2xl text-gray-500 cursor-pointer"
+            onClick={() => {
+              toggleInfo(
+                <div>
+                  <p>يجب إدخال الفكرة العامة</p>
+                  <p>مثال: القضايا الوطنية والقومية</p>
+                  <br></br>
+                  <p>يجب إدخال فكرة فرعية واحدة على الأقل</p>
+                  <p>مثال: </p>
+                  <p>الفكرة1: الفرح بيوم الجلاء,</p>
+                  <p>الشاهد: يا عروس المجد تيهي واسحبي في مغانيا ذيول الشهب </p>
+                  <p>الشاعر: عمر أبو ريشة</p>
+                </div>
+              );
+            }}
+          />
+        </div>
+
+        <div className="main-form fade-in fade-in-2">
+          <h2 className="">الفكرة العامة: </h2>
+          <div className="main-input">
+            <input ref={mainIdea} />
+            <div></div>
+          </div>
+        </div>
+        <div className="sub-ideas" ref={subIdeasRef}>
+          {subIdeas
+            ? subIdeas.map((item, index) => {
+                return (
+                  <div className="sub-idea" key={index}>
+                    <div className="main">
+                      <h2>الفكرة {index + 1}:</h2>
+                      <div className="main-input">
+                        <input />
+                        <div></div>
+                      </div>
+                    </div>
+                    <div className="others">
+                      <div className="witness">
+                        {" "}
+                        <h2>الشاهد :</h2>
+                        <div className="main-input">
+                          <input />
+                          <div></div>
+                        </div>
+                      </div>
+                      <div className="poet">
+                        <h2>الشاعر :</h2>
+                        <div className="main-input">
+                          <input />
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            : null}
+        </div>
+        <button
+          className={`add-sub-idea shadow-0 fade-in fade-in-3`}
+          onClick={() => {
+            setSubIdeas((prev) => [...prev, subIdeas.length]);
+          }}
+        >
+          أضف فكرة فرعية +
+        </button>
+        <a href="#arabic-writer-response">
+          <button
+            disabled={requested}
+            className={`generate gradient fade-in fade-in-4 `}
+            onClick={() => {
+              if (!mainIdea.current.value) {
+                setInputError("يجب إدخال الفكرة الأساسية");
+              } else if (subIdeasRef.current.children.length == 0) {
+                setInputError("يجب إدخال فكرة واحدة على الأقل");
+              } else {
+                for (let i = 0; i < subIdeasRef.current.children.length; i++) {
+                  let mainIdea =
+                    subIdeasRef.current.children[i].children[0].children[1]
+                      .children[0].value;
+                  let witness =
+                    subIdeasRef.current.children[i].children[1].children[0]
+                      .children[1].children[0].value;
+                  let poet =
+                    subIdeasRef.current.children[i].children[1].children[1]
+                      .children[1].children[0].value;
+                  if (!mainIdea || !witness || !poet) {
+                    setInputError("يجب إدخال كل مدخلات الفكرة");
+                  } else {
+                    setInputError("");
+                    setSubIdeasData((prev) => [
+                      ...prev,
+                      [mainIdea, witness, poet],
+                    ]);
+                  }
+                }
+              }
+            }}
+          >
+            Generate
+          </button>
+        </a>
+
+        {requested ? (
+          loading ? (
+            <div id="arabic-writer-response" className="loading">
+              <div className="short"></div>
+              <div></div>
+              <div></div>
+              <div className="short"></div>
+              <div></div>
+              <div></div>
+              <div className="short"></div>
+              <div></div>
+              <div></div>
+              <div className="short"></div>
+              <div></div>
+              <div></div>
+              <div className="short"></div>
+              <div></div>
+              <div></div>
+            </div>
+          ) : error ? (
+            <div id="arabic-writer-response">{error}</div>
+          ) : data ? (
+            <div className="response" id="arabic-writer-response">
+              {renderText(data)}{" "}
+            </div>
+          ) : null
+        ) : null}
+      </div>
+    </>
+  );
+};
