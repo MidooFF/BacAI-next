@@ -8,22 +8,35 @@ import { useFetch } from "@/app/hooks/useFetch";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { useBlack } from "@/app/context/BlackContext";
 import { useInfo } from "@/app/context/InfoContext";
+import { useAuth } from "@/app/context/AuthContext";
+import { useRouter } from "next/navigation";
+import { LoadingScreen } from "@/app/components/loadingScreen";
 
 export const ArabicWriter = () => {
+  const router = useRouter();
+  const { isLoggedIn, loading: authLoading } = {
+    isLoggedIn: true,
+    loading: false,
+  };
+  console.log(isLoggedIn);
+  console.log(authLoading);
   const mainIdea = useRef();
   const [subIdeas, setSubIdeas] = useState([]);
   const [subIdeasData, setSubIdeasData] = useState([]);
   const subIdeasRef = useRef();
   const [inputError, setInputError] = useState("");
   const inputErrorRef = useRef();
-  const { data, loading, error, fetchData } = useFetch();
+  const { data, loading: fetchLoading, error, fetchData } = useFetch();
   const [requested, setRequested] = useState(false);
   const { toggleInfo } = useInfo();
   const { toggleBlack } = useBlack();
 
   useEffect(() => {
+    if (!isLoggedIn && !authLoading) {
+      router.push("/login");
+    }
     window.scrollTo(0, 0);
-  }, []);
+  }, [isLoggedIn, authLoading]);
 
   useEffect(() => {
     if (subIdeasData.length > 0) {
@@ -49,6 +62,9 @@ export const ArabicWriter = () => {
       });
     });
   };
+  if (authLoading) {
+    return <LoadingScreen></LoadingScreen>;
+  }
   return (
     <>
       <div className="container section-padding">
@@ -168,7 +184,7 @@ export const ArabicWriter = () => {
         </a>
 
         {requested ? (
-          loading ? (
+          fetchLoading ? (
             <div id="arabic-writer-response" className="loading">
               <div className="short"></div>
               <div></div>
