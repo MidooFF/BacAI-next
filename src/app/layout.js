@@ -18,6 +18,9 @@ const rubik = Rubik({
 export const metadata = {
   title: "BacAI",
   description: "أول موقع ذكاء اصطناعي لطلاب البكالوريا في سوريا",
+  other: {
+    "google-site-verification": "rDaoZswQUSlhFsjdTGBj-zsHPqaNHdyZ6pVajV4qovM",
+  },
 };
 
 export default function RootLayout({ children }) {
