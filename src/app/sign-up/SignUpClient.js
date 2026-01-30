@@ -30,9 +30,12 @@ export const SignUp = () => {
   };
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const [loading, setLoading] = useState(false);
   const handleSignUp = async () => {
@@ -63,6 +66,13 @@ export const SignUp = () => {
     } else {
       setPasswordError("");
     }
+    if (!email) {
+      setEmailError("هذه الخانة مطلوبة");
+    } else if (!emailPattern.test(email)) {
+      setEmailError("هذا البريد الالكتروني غير صالح");
+    } else {
+      setEmailError("");
+    }
     setLoading(true);
 
     try {
@@ -71,6 +81,7 @@ export const SignUp = () => {
         {
           username: username,
           password: password,
+          email: email,
         },
         {
           withCredentials: true,
@@ -81,10 +92,14 @@ export const SignUp = () => {
       setLoading(false);
       router.push("/services");
     } catch (err) {
-      if (err.status == 409) {
+      const errMessage = err.response.data.message;
+      if (errMessage == "used email") {
+        setEmailError("هذا البريد الالكتروني مستخدم مسبقا");
+      } else if (errMessage == "used username") {
         setUsernameError("هذا الاسم مستخدم سابقا");
       } else {
         setUsernameError("");
+        setEmailError("");
       }
       setLoading(false);
     }
@@ -97,15 +112,16 @@ export const SignUp = () => {
         className="bg-white shadow-3 rounded-[20px] w-[500px]  mx-auto mt-[40px] p-[15px] py-[50px] pb-[30px]
           max-sm:mt-[20px] max-sm:w-full"
       >
-        <div className="flex flex-col mb-[40px]">
+        <div className="flex flex-col mb-[30px]">
           <label
             htmlFor="signup-username"
             className="text-2xl mb-[10px] max-sm:text-[18px]"
           >
             اسم المستخدم:
           </label>
-          <div className="main-input">
+          <div className="main-input w-full">
             <input
+              className="w-full"
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
@@ -122,15 +138,16 @@ export const SignUp = () => {
           </div>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-[30px]">
           <label
             htmlFor="signup-password"
             className="text-2xl mb-[10px] max-sm:text-[18px]"
           >
             كلمة المرور:
           </label>
-          <div className="main-input">
+          <div className="main-input w-full">
             <input
+              className="w-full"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -144,6 +161,32 @@ export const SignUp = () => {
             className={`handle-error ${passwordError ? "active" : "disactive"}`}
           >
             {passwordError}
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="signup-email"
+            className="text-2xl mb-[10px] max-sm:text-[18px]"
+          >
+            البريد الالكتروني:
+          </label>
+          <div className="main-input w-full">
+            <input
+              className="w-full"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              type="text"
+              id="signup-email"
+            />
+            <div></div>
+          </div>
+          <div
+            className={`handle-error ${emailError ? "active" : "disactive"}`}
+          >
+            {emailError}
           </div>
         </div>
 

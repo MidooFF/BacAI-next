@@ -68,15 +68,16 @@ export const LoginClient = () => {
         className="bg-white shadow-3 rounded-[20px] w-[500px]  mx-auto mt-[40px] p-[15px] py-[50px] pb-[30px]
       max-sm:mt-[20px] max-sm:w-full"
       >
-        <div className="flex flex-col mb-[40px]">
+        <div className="flex flex-col mb-[30px]">
           <label
             htmlFor="login-username"
             className="text-2xl mb-[10px] max-sm:text-[18px]"
           >
-            اسم المستخدم:
+            اسم المستخدم أو البريد الالكتروني:
           </label>
-          <div className="main-input">
+          <div className="main-input w-full">
             <input
+              className="w-full"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               type="text"
@@ -91,15 +92,16 @@ export const LoginClient = () => {
           </div>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-[30px]">
           <label
             htmlFor="login-password"
             className="text-2xl mb-[10px] max-sm:text-[18px]"
           >
             كلمة المرور:
           </label>
-          <div className="main-input">
+          <div className="main-input w-full">
             <input
+              className="w-full"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="text"
@@ -112,6 +114,12 @@ export const LoginClient = () => {
           >
             {passwordError}
           </div>
+          <Link
+            href="/forgot-password"
+            className="text-blue-500 cursor-pointer "
+          >
+            نسيت كلمة السر؟
+          </Link>
         </div>
 
         <div className="flex justify-center">

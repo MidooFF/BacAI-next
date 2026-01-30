@@ -16,6 +16,5 @@ export default async function sitemap() {
       url: "https://bacai-next.netlify.app/consecutive-steady",
       lastModified: new Date(),
     },
-    // Add all your pages
   ];
 }
