@@ -178,7 +178,7 @@ export const ComplexNumTrans = () => {
       <div className="main-form fade-in fade-in-2 max-sm:flex-row">
         <h2 className="mb-[10px]">العدد:</h2>
         <div className="flex gap-[10px] ">
-          <div className="main-input">
+          <div className="main-input max-w-[80%]">
             <input dir="ltr" ref={functionRef} />
             <div></div>
           </div>
@@ -221,7 +221,10 @@ export const ComplexNumTrans = () => {
           π
         </button>
       </div>
-      <div className="mt-[10px] relative w-48 fade-in fade-in-3" dir="rtl">
+      <div
+        className="mt-[10px] relative w-48 fade-in fade-in-3  z-[10]"
+        dir="rtl"
+      >
         <div className="text-gray-700 mb-1">تحويل إلى:</div>
         <div
           className="custom-select-wrapper bg-white border border-gray-300 rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-200"

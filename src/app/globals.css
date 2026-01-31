@@ -66,10 +66,13 @@ body.scroll-off {
 .fade-in-4 {
   animation-delay: 500ms;
 }
+.fade-in-5 {
+  animation-delay: 600ms;
+}
 
 .gradient {
   background: #ff00ea;
-background: linear-gradient(90deg, rgba(255, 0, 234, 1) 0%, rgba(81, 0, 255, 1) 100%);
+background: linear-gradient(90deg, rgb(255, 0, 234) 0%, rgba(81, 0, 255, 1) 100%);
 }
 .gradient-reverse {
   background: #5100ff;

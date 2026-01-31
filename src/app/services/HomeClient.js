@@ -77,7 +77,7 @@ export const HomeClient = () => {
         onClick={() => {
           router.push("/services/complex-num-trans");
         }}
-        className="service shadow-1 fade-in fade-in-3 bg-white text-center rounded-[15px] pb-[20px] pt-[30px] relative cursor-pointer"
+        className="service shadow-1 fade-in fade-in-4 bg-white text-center rounded-[15px] pb-[20px] pt-[30px] relative cursor-pointer"
       >
         <div
           className="service-icon absolute w-[50px] h-[50px] top-[0] left-[50%] rounded-[15px] shadow-0 gradient 
