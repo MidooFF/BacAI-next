@@ -165,7 +165,7 @@ export const FunctionChanges = () => {
       <div className="main-form fade-in fade-in-2 max-sm:flex-row">
         <h2 className="mb-[10px]">التابع:</h2>
         <div className="flex gap-[10px] ">
-          <div className="main-input max-w-[80%]">
+          <div className="main-input max-w-[65%]">
             <input dir="ltr" ref={functionRef} />
             <div></div>
           </div>
