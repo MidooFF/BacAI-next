@@ -8,6 +8,8 @@ import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { LoadingScreen } from "../components/loadingScreen";
 import { useBlack } from "../context/BlackContext";
+import { InlineMath, BlockMath } from "react-katex";
+import "katex/dist/katex.min.css";
 
 export const HomeClient = () => {
   const router = useRouter();
@@ -46,9 +48,10 @@ export const HomeClient = () => {
       >
         <div
           className="service-icon absolute w-[50px] h-[50px] top-[0] left-[50%] rounded-[15px] shadow-0 gradient 
-          translate-y-[-50%] translate-x-[-50%] flex justify-center items-center"
+          translate-y-[-50%] translate-x-[-50%] flex justify-center items-center text-white"
         >
-          <TbMathFunction className="text-white font-bold text-[30px]" />
+          {/* <TbMathFunction className="text-white font-bold text-[30px]" /> */}
+          <InlineMath>f(x)</InlineMath>
         </div>
         <p className="service-name text-2xl">دراسة تغيرات التابع</p>
       </div>
@@ -63,9 +66,28 @@ export const HomeClient = () => {
           className="service-icon absolute w-[50px] h-[50px] top-[0] left-[50%] rounded-[15px] shadow-0 gradient 
           translate-y-[-50%] translate-x-[-50%] flex justify-center items-center"
         >
-          <h3 className="text-white font-bold text-[25px]">Un</h3>
+          <h3 className="text-white font-bold text-[25px]">
+            <InlineMath>Un</InlineMath>
+          </h3>
         </div>
         <p className="service-name text-2xl">دراسة اطراد متتالية</p>
+      </div>
+
+      <div
+        onClick={() => {
+          router.push("/services/complex-num-trans");
+        }}
+        className="service shadow-1 fade-in fade-in-3 bg-white text-center rounded-[15px] pb-[20px] pt-[30px] relative cursor-pointer"
+      >
+        <div
+          className="service-icon absolute w-[50px] h-[50px] top-[0] left-[50%] rounded-[15px] shadow-0 gradient 
+          translate-y-[-50%] translate-x-[-50%] flex justify-center items-center"
+        >
+          <h3 className="text-white font-bold text-[25px]">
+            <InlineMath>z</InlineMath>
+          </h3>
+        </div>
+        <p className="service-name text-2xl">تحويلات عدد عقدي</p>
       </div>
     </div>
   );
