@@ -89,6 +89,22 @@ export const HomeClient = () => {
         </div>
         <p className="service-name text-2xl">تحويلات عدد عقدي</p>
       </div>
+      <div
+        onClick={() => {
+          router.push("/services/complex-equations");
+        }}
+        className="service shadow-1 fade-in fade-in-4 bg-white text-center rounded-[15px] pb-[20px] pt-[30px] relative cursor-pointer"
+      >
+        <div
+          className="service-icon absolute w-[50px] h-[50px] top-[0] left-[50%] rounded-[15px] shadow-0 gradient 
+          translate-y-[-50%] translate-x-[-50%] flex justify-center items-center"
+        >
+          <h3 className="text-white font-bold text-[25px]">
+            <InlineMath>=</InlineMath>
+          </h3>
+        </div>
+        <p className="service-name text-2xl">حل معادلات عقدية</p>
+      </div>
     </div>
   );
 };
