@@ -4,9 +4,10 @@ import { useState, useCallback } from "react";
 import Cerebras from "@cerebras/cerebras_cloud_sdk";
 
 const client = new Cerebras({
-  apiKey: "csk-6v2ch4c3mttnm9fyc32r5hh982w8pf2rj6xt4ycnw9n5cxc2", // This is the default and can be omitted
+  apiKey: "csk-3r368e4xwdf44whv2epxntc3mpvf8fpeytj84dvvd3d6f8r2", // This is the default and can be omitted
 });
-
+// csk-6v2ch4c3mttnm9fyc32r5hh982w8pf2rj6xt4ycnw9n5cxc2
+// csk-3yw2vv94m8kh9xywkrvrkt6ep4fc52ywvf3dtw3pev62v3m3
 // export function useFetch(maxRetries = 5, initialDelay = 1000) {
 //   const [data, setData] = useState(null);
 //   const [loading, setLoading] = useState(false);
@@ -75,7 +76,7 @@ export function useFetch(maxRetries = 5, initialDelay = 1000) {
       try {
         const response = await client.chat.completions.create({
           messages: [{ role: "user", content: query }],
-          model: "gpt-oss-120b",
+          model: "qwen-3-235b-a22b-instruct-2507",
         });
         setLoading(false);
         setData(response.choices[0].message.content);

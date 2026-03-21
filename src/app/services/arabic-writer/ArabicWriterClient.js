@@ -45,7 +45,7 @@ export const ArabicWriter = () => {
       }, ${subIdeasData.map(
         (item, index) =>
           `${index + 1}: ${item[0]}, الشاهد: ${item[1]}, الشاعر: ${item[2]}`
-      )}, اكتب مقدمة وخاتمة مناسبة للموضوع, تأكد أن يكون ذكر الشاعر وشاهده في نهاية كل فكرة أي لا تذكر شيء عن الشاعر ولا شاهده حتى الأسطر الأخيرة من الفكرة `;
+      )}, اكتب مقدمة وخاتمة مناسبة للموضوع, تأكد أن يكون ذكر الشاعر وشاهده في نهاية كل فكرة أي لا تذكر شيء عن الشاعر ولا شاهده حتى الأسطر الأخيرة من الفكرة, وأياك أن تضع كلمات أجنبية في النص `;
       fetchData(content);
       setRequested(true);
     }
@@ -150,7 +150,6 @@ export const ArabicWriter = () => {
         </button>
         <a href="#arabic-writer-response">
           <button
-            disabled={requested}
             className={`generate gradient fade-in fade-in-4 `}
             onClick={() => {
               if (!mainIdea.current.value) {
@@ -181,7 +180,7 @@ export const ArabicWriter = () => {
               }
             }}
           >
-            Generate
+            {requested ? "reGenerate" : "Generate"}
           </button>
         </a>
 
